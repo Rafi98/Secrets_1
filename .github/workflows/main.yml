@@ -21,6 +21,6 @@ jobs:
           echo "Updating secret..."
           echo "${{ secrets.NEW_SECRET }}" | gh secret set MY_SECRET
 
-      - name: Use Updated Secret
+      - name: Use Updated Secret 
         run: echo ${{ secrets.MY_SECRET }}
 
