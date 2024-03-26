@@ -17,6 +17,9 @@ jobs:
         run: echo $TEMPORARY_SECRET
 
 
+  Install_gh_CLI:
+     runs-on: ubuntu-latest
+     steps:
       - name: Install gh CLI
         run: |
           # Install gh CLI
@@ -25,11 +28,29 @@ jobs:
           && echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
           && sudo apt update \
           && sudo apt install gh -y
+  login:
+   runs-on: ubuntu-latest
+   steps:
+      - name: Log in to GitHub
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          gh auth login --with-token <<<"${GH_TOKEN}"
+    
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Use GitHub CLI
+        run: gh repo view
 
+
+        
+
+
+  
       - name: Update Repository Secret
         run: |
           echo "Updating secret..."
-          echo "${{ secrets.NEW_SECRET }}" | gh secret set MY_SECRET
+          echo "${{ secrets.MY_SECRET }}" | gh secret set MY_SECRET
 
       - name: Use Updated Secret 
         run: echo ${{ secrets.MY_SECRET }}
