@@ -1,0 +1,17 @@
+name: Dynamic Secrets Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  dynamic-secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate Temporary Secret
+        id: generate-secret
+        run: echo "TEMPORARY_SECRET=$(openssl rand -hex 16)" >> $GITHUB_ENV
+      
+      - name: Use Temporary Secret
+        run: echo $TEMPORARY_SECRET
