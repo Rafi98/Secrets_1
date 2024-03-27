@@ -1,0 +1,19 @@
+name: Passing Secrets
+on:
+  # Allows you to run the workflow manually from Actions tab
+  workflow_dispatch:
+
+jobs:
+  # Job 1: Read & encrypt
+  github-secrets:
+    runs-on: secrets-runner
+    name: A Job to read and encrypt a secret
+    steps:
+      - id: read-secret
+        shell: bash
+        run: |
+          OUR_SECRET=${{ secrets.MY_SECRET  }};
+          BINARY_ENCRYPTED_SECRET=$(echo -n "$OUR_SECRET" | openssl enc -aes-256-cbc -pbkdf2 -salt -k "${{ secrets.ENCRYPTION_PASSWORD }}")
+          echo "our-secret=$BINARY_ENCRYPTED_SECRET" >> $GITHUB_OUTPUT
+    outputs:
+      read-secret: ${{ steps.read-secret.outputs.our-secret }}
