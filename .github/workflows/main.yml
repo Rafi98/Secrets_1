@@ -10,7 +10,7 @@ on:
 
 
 jobs:
-github-secrets:
+ github-secrets:
     runs-on: secrets-runner
     name: A Job to read and encrypt a secret
     steps:
@@ -23,16 +23,7 @@ github-secrets:
     outputs:
       read-secret: ${{ steps.read-secret.outputs.our-secret }}
 
-
-
-
-
-
-
-
-
-
-  dynamic-secrets:
+ dynamic-secrets:
     runs-on: ubuntu-latest
     steps:
       - name: Generate Temporary Secret
@@ -43,7 +34,7 @@ github-secrets:
         run: echo $TEMPORARY_SECRET
 
 
-  Install_gh_CLI:
+ Install_gh_CLI:
      runs-on: ubuntu-latest
      steps:
       - name: Install gh CLI
@@ -54,7 +45,7 @@ github-secrets:
           && echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
           && sudo apt update \
           && sudo apt install gh -y
-  login:
+ login:
    runs-on: ubuntu-latest
    steps:
       - name: Log in to GitHub
