@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  # Job 1: Read & encrypt
+  ## Job 1: Read & encrypt
   github-secrets:
     runs-on: secrets-runner
     name: A Job to read and encrypt a secret
