@@ -1,9 +1,17 @@
-name: Dynamic Secrets Workflow
+#name: Dynamic Secrets Workflow
 
+#on:
+  #push:
+    #branches:
+      #- main
+
+
+
+
+name: Passing Secrets
 on:
-  push:
-    branches:
-      - main
+  # Allows you to run the workflow manually from Actions tab
+  workflow_dispatch:
 
 jobs:
   dynamic-secrets:
